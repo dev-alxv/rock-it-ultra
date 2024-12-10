@@ -1,0 +1,33 @@
+<h1>Hello{{ userName !== '' ? ', ' + userName : null }}! <br /> Let's play Rock, Scissors, Paper</h1>
+
+@if (gameStateStream$ | async; as GameState) {
+
+@if (!uiRequestInProgress) {
+
+@if (!userName) {
+
+<h2>How should we call you?</h2>
+
+<div class="username--wrapper">
+
+  <mat-form-field class="game-form-field">
+    <input #username matInput type="text" [(ngModel)]="userNameInput" placeholder="Your name">
+  </mat-form-field>
+
+  <button mat-raised-button class="main-button" (click)="onSetUserName()" [disabled]="userNameInput === '' || userNameInput.length < 3">Choose name</button>
+</div>
+
+} @else {
+
+<h2>Please, choose game mode</h2>
+
+<div class="game-select--wrapper">
+  <button mat-raised-button class="main-button" (click)="onStartGame('HUMAN_VS_COMPUTER')">Human vs. Computer</button>
+  <button mat-raised-button class="main-button" (click)="onStartGame('COMPUTER_VS_COMPUTER')">Computer vs. Computer</button>
+</div>
+}
+
+} @else {
+<mat-spinner></mat-spinner>
+}
+}

@@ -1,0 +1,78 @@
+@if (gameStateStream$ | async; as GameState) {
+
+<div class="players--wrapper">
+
+  @for (player of GameState.players; track $index) {
+
+  <mat-card>
+    <mat-card-content [ngClass]="{ 'content--with-weapons': GameState.gameMode === 'HUMAN_VS_COMPUTER'}">
+      <div class="player--info">
+        <h2>{{ player.name }}</h2>
+        <button mat-fab class="score tertiary-button">{{ player.score }}</button>
+      </div>
+
+      @if (player.type === 'HUMAN') {
+
+      <h4>Choose your weapon:</h4>
+
+      <div class="weapons-wrapper">
+
+        @for (weapon of GameState.gameWeaponsList; track $index) {
+
+        <button mat-raised-button [disabled]="uiIntentInProgress" (click)="onPlayerWeaponSelection(weapon)">
+          {{ weapon.icon }}
+        </button>
+        }
+      </div>
+      }
+
+      @if (player.type === 'COMPUTER') {
+
+      @if (uiIntentInProgress) {
+
+      <h4>Thinking ...</h4>
+
+      }
+
+      }
+    </mat-card-content>
+    <mat-card-footer>
+
+      @if (player.chosenWeapon && !uiIntentInProgress) {
+
+      <div class="weapon-icon--big">
+
+        {{ player.chosenWeapon.icon }}
+      </div>
+      }
+
+    </mat-card-footer>
+  </mat-card>
+  }
+
+</div>
+
+<div class="result-board">
+
+  @if (uiIntentInProgress) {
+
+  <mat-spinner></mat-spinner>
+
+  } @else {
+
+  <h2>{{ GameState.winnerBoard.winner ? GameState.winnerBoard.winner.name + ' wins!' : GameState.winnerBoard.message }}</h2>
+
+  @if (GameState.gameMode === 'COMPUTER_VS_COMPUTER') {
+
+  <button mat-raised-button class="next-turn--button" (click)="onComputerVsComputerPlay()">Play Computer vs. Computer</button>
+  }
+
+  <button mat-raised-button (click)="onNewGame()">Start a new game</button>
+  }
+</div>
+
+} @else {
+
+<h3>Loading ...</h3>
+<mat-spinner></mat-spinner>
+}

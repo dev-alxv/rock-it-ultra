@@ -1,0 +1,67 @@
+.players--wrapper {
+  display: flex;
+  gap: 35px;
+
+  mat-card {
+    min-width: 400px;
+
+    mat-card-content {
+      &.content--with-weapons {
+        min-height: 250px;
+      }
+    }
+
+    mat-card-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 25px;
+    }
+  }
+
+  .player--info {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    .score {
+      margin-top: 0.5em;
+      margin-left: 2em;
+      font-size: 1.5em;
+    }
+  }
+
+  .weapons-wrapper {
+    button {
+      font-size: 35px;
+      padding: 30px;
+
+      &:disabled {
+        background-color: var(--gray-200);
+      }
+
+      &.selected-weapon {
+        background-color: var(--gray-400);
+      }
+    }
+  }
+
+  .weapon-icon--big {
+    font-size: 100px;
+  }
+
+  h4 {
+    font-weight: 500;
+  }
+}
+
+.result-board {
+  display: flex;
+  margin-top: 80px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .next-turn--button {
+    margin-bottom: 40px;
+  }
+}

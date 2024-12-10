@@ -1,0 +1,55 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$rockTheme: mat.define-theme(
+  (
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$magenta-palette
+    ),
+    typography: (
+      brand-family: (
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol"
+      ),
+      plain-family: (
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol"
+      )
+    )
+  )
+);
+
+html {
+  @include mat.core-theme($rockTheme);
+  @include mat.all-component-themes($rockTheme);
+}
+
+// Apply primary color variants for button components
+.primary-button {
+  @include mat.button-color($rockTheme, $color-variant: primary);
+}
+
+// Apply tertiary color variants for button components
+.tertiary-button {
+  @include mat.button-color($rockTheme, $color-variant: tertiary);
+}
